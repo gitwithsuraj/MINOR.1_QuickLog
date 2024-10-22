@@ -105,7 +105,10 @@ int main() {
     auto segregatedByFileType = segregateByCriteria(logEntries, "fileType");
 
     // Writing segregated logs by file type (optional)
-    for (const auto& [key, logs] : segregatedByFileType) {
+    for (const auto& entry : segregatedByFileType) {
+        const std::string& key = entry.first;
+        const std::vector<LogEntry>& logs = entry.second;
+        
         std::string csvFileName = "logs_by_fileType_" + key + ".csv";
         writeCSV(logs, csvFileName);
     }
